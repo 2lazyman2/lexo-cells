@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bacteria Recognition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <!-- 主要內容區 -->
+        <div class="content">
+
+
+                       <!-- 左側：攝像頭區域 -->
+            <div class="video-section">
+                <h1 class="title">Roboflow細菌辨識</h1>
+
+                <div class="video-container">
+                    <!-- 舊的 img 標籤已移除 -->
+                    <!-- 新增 video 用於顯示即時影像 -->
+                    <video id="video" autoplay playsinline muted></video>
+                    <!-- 新增 canvas 用於繪製偵測框 -->
+                    <canvas id="overlay"></canvas>
+
+                    <!-- 疊加層：顯示狀態 -->
+                    <div class="video-overlay">
+                        <!-- 疊加在畫面上方，用來顯示目前模型狀態 -->
+                        <div class="status-indicator">
+                            <span class="status-dot"></span> <!-- 綠燈或紅燈 -->
+                            <span class="status-text">偵測中</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                       <!-- 右側：辨識結果區域 -->
+            <div class="results-section">
+                <div class="results-header">
+                    <h2>辨識結果</h2>
+                </div>
+                
+                <div class="results-list" id="resultsList">
+                    <!-- 初始畫面（模型尚未回傳結果） -->
+                    <div class="empty-state">
+                        <div class="empty-icon">🔍</div>
+                        <p>載入中...</p>
+                        <small>正在初始化模型類別</small>
+                    </div>
+                </div>
+            </div>
+       <div>
+    </div>
+    <!-- 3.連接ＪＳ主程式 -->
+      <script src="script.js"></script>
+
+    
+</body>
+</html>

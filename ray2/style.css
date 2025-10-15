@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft JhengHei', Arial, sans-serif;
+    background: #bae6fd;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+.container {
+    width: 100%;
+    height: 100vh;
+    background: #bae6fd;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.content {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex: 1;
+    overflow: hidden;
+}
+.video-section {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.video-container {
+    position: relative;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(14, 165, 233, 0.2);
+}
+/* 舊的 img 樣式可以刪除或保留 */
+.video-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- 新增以下樣式 --- */
+.video-container video,
+.video-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持視訊比例並填滿容器 */
+}
+
+.video-container canvas {
+    z-index: 5; /* 確保 canvas 在 video 上方 */
+    background: transparent;
+}
+/* -------------------- */
+
+.video-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+}
+
+.status-indicator {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background: #0ea5e9;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 10px #0ea5e9;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.6; transform: scale(1.1); }
+}
+
+.status-text {
+    color: #0c4a6e;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+.results-section {
+    flex: 1;
+    min-width: 350px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(14, 165, 233, 0.2);
+}
+.results-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(14, 165, 233, 0.3);
+}
+
+.results-header h2 {
+    font-size: 1.5em;
+    color: #0c4a6e;
+    font-weight: 700;
+}
+.results-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.results-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.results-list::-webkit-scrollbar-track {
+    background: rgba(14, 165, 233, 0.1);
+    border-radius: 10px;
+}
+
+.results-list::-webkit-scrollbar-thumb {
+    background: rgba(14, 165, 233, 0.5);
+    border-radius: 10px;
+}
+
+.results-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(14, 165, 233, 0.7);
+}
+/* 空狀態 */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #7dd3fc;
+}
+
+.empty-icon {
+    font-size: 4em;
+    margin-bottom: 15px;
+    opacity: 0.3;
+}
+
+.empty-state p {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #0ea5e9;
+}
+
+.empty-state small {
+    font-size: 0.9em;
+    color: #7dd3fc;
+}
+/* 結果項目 */
+.result-item {
+    background: transparent;
+    padding: 18px 0;
+    margin-bottom: 8px;
+    transition: background 0.3s ease;
+    border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+/* 移除 slideIn 動畫，避免閃爍 */
+
+.result-item:hover {
+    background: rgba(14, 165, 233, 0.05);
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.class-name {
+    font-size: 1em;
+    font-weight: 600;
+    color: #0c4a6e;
+}
+
+.class-count {
+    display: none;
+}
+/* 未偵測到的項目 */
+.result-item.not-detected {
+    opacity: 0.4;
+}
+
+.result-item.not-detected .class-name {
+    color: #64748b;
+}
+/* Progress Bar - 漸層藍色 */
+.progress-container {
+    margin-top: 8px;
+}
+
+.progress-label {
+    font-size: 0.85em;
+    color: #0c4a6e;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(14, 165, 233, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0ea5e9 0%, #7dd3fc 100%);
+    border-radius: 10px;
+    transition: width 0.8s ease-out;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+}
+
+.progress-fill:empty::after {
+    content: '';
+}
+
+/* 百分比數字的過渡效果 */
+.percentage {
+    transition: all 0.3s ease;
+}
+/* 響應式設計 */
+@media (max-width: 1200px) {
+    .content {
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .results-section {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 900px) {
+    .content {
+        flex-direction: column;
+    }
+    
+    .results-section {
+        max-width: 100%;
+        flex: 0 0 350px;
+    }
+    
+    .title {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    
+    .results-section {
+        flex: 0 0 300px;
+        min-width: 100%;
+    }
+}
+
+/* 隱藏元素 */
+.refresh-btn {
+    display: none;
+}
+
+.footer {
+    display: none;
+}
