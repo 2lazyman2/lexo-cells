@@ -11,38 +11,34 @@
     <div class="container">
         <!-- 主要內容區 -->
         <div class="content">
-
-
-                       <!-- 左側：攝像頭區域 -->
+                 <!-- 1.左欄：攝影機畫面 -->
             <div class="video-section">
-                <h1 class="title">Roboflow細菌辨識</h1>
-
                 <div class="video-container">
-                    <!-- 舊的 img 標籤已移除 -->
-                    <!-- 新增 video 用於顯示即時影像 -->
-                    <video id="video" autoplay playsinline muted></video>
-                    <!-- 新增 canvas 用於繪製偵測框 -->
-                    <canvas id="overlay"></canvas>
+                    <!-- 用 video 元素直接顯示攝像頭 -->
+                    <video id="videoElement" autoplay playsinline></video>
+                    
+                    <!-- 用於繪製偵測框的 canvas -->
+                    <canvas id="overlayCanvas"></canvas>
+                    
+                    <!-- 隱藏的 canvas 用於擷取畫面 -->
+                    <canvas id="captureCanvas" style="display: none;"></canvas>
 
-                    <!-- 疊加層：顯示狀態 -->
+                    <!-- 狀態顯示 -->
                     <div class="video-overlay">
-                        <!-- 疊加在畫面上方，用來顯示目前模型狀態 -->
                         <div class="status-indicator">
-                            <span class="status-dot"></span> <!-- 綠燈或紅燈 -->
-                            <span class="status-text">偵測中</span>
+                            <span class="status-dot"></span>
+                            <span class="status-text" id="statusText">初始化中...</span>
                         </div>
                     </div>
                 </div>
             </div>
-
-                       <!-- 右側：辨識結果區域 -->
+                     <!-- 2.右欄：辨識結果條 -->
             <div class="results-section">
                 <div class="results-header">
                     <h2>辨識結果</h2>
                 </div>
                 
                 <div class="results-list" id="resultsList">
-                    <!-- 初始畫面（模型尚未回傳結果） -->
                     <div class="empty-state">
                         <div class="empty-icon">🔍</div>
                         <p>載入中...</p>
@@ -50,11 +46,17 @@
                     </div>
                 </div>
             </div>
-       <div>
+  <script src="script.js"></script>
+
+
+       <!-- 1.左欄：攝影機畫面 -->
+    
+       <!-- 2.右欄：辨識結果條 -->
+
+        <div>
     </div>
     <!-- 3.連接ＪＳ主程式 -->
-      <script src="script.js"></script>
-
+    
     
 </body>
 </html>
