@@ -57,7 +57,7 @@ try:
     
     # 指定要使用的模型版本
     # ⭐ 每次在 Roboflow 重新訓練模型，版本號會增加
-    version = project.version(2)
+    version = project.version(3)
     
     print("✅ 版本載入成功")
     
